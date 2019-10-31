@@ -1,0 +1,44 @@
+version: '3'
+
+volumes:
+  mysql:
+
+services:
+  mqtt:
+   image: "nexus3.auiag.corp:18000/eclipse-mosquitto"
+   ports:
+     - "1883:1883"
+     - "9001:9001"
+  #  volumes:
+  #    - ./data/mqtt/config:/mosquitto/config
+  #    - ./data/mqtt/data:/mosquitto/data
+  #    - ./data/mqtt/log:/mosquitto/log
+
+  mysql:
+    image: nexus3.auiag.corp:18000/mysql
+    environment:
+      MYSQL_DATABASE: 'mqtt'
+      MYSQL_USER: 'mqtt'
+      MYSQL_PASSWORD: 'mqtt'
+      MYSQL_ROOT_PASSWORD: 'admin'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - mysql:/var/lib/mysql
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+
+  app:
+    image: app:test
+    environment:
+      MQTT_HOST: 'mqtt'
+      MYSQL_HOST: 'mysql'
+    links:
+      - mqtt
+      - mysql
+    depends_on:
+      - mqtt
+      - mysql
+
