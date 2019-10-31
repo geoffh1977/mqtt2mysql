@@ -31,7 +31,8 @@ services:
       - /etc/timezone:/etc/timezone:ro
 
   app:
-    image: app:test
+    build: .
+    image: mqtt2mysql:compose
     environment:
       MQTT_HOST: 'mqtt'
       MYSQL_HOST: 'mysql'

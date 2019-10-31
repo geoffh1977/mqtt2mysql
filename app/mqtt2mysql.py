@@ -102,4 +102,4 @@ mqttc.loop_forever()
 # Close Database On Exit
 mqttc.disconnect()
 mariadb_connection.close()
-logging.info('Disconnecting For MySql and MQTT - Shutting Down')
+logging.info('Disconnecting From MySql and MQTT - Shutting Down')
