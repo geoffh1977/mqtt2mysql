@@ -1,5 +1,5 @@
 # Build Application Container
-FROM nexus3.auiag.corp:18000/alpine:3
+FROM alpine:3
 
 # Install Software Packages
 # hadolint ignore=DL3018

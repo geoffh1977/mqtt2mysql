@@ -5,7 +5,7 @@ volumes:
 
 services:
   mqtt:
-   image: "nexus3.auiag.corp:18000/eclipse-mosquitto"
+   image: "eclipse-mosquitto"
    ports:
      - "1883:1883"
      - "9001:9001"
@@ -15,7 +15,7 @@ services:
   #    - ./data/mqtt/log:/mosquitto/log
 
   mysql:
-    image: nexus3.auiag.corp:18000/mysql
+    image: mysql
     environment:
       MYSQL_DATABASE: 'mqtt'
       MYSQL_USER: 'mqtt'
